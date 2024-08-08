@@ -1,0 +1,112 @@
+---
+title: "Day 4: Morning Practices, Matrices"
+author: "Takeen Shamloo"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+## Create matrices in R ----
+
+```{r}
+# create sequence of values from 1-10 inclusive ----
+myValues <- seq(1, 10, 1)
+myValues
+
+# convert seq to matrices ----
+myMatrix <- matrix(myValues, 2, 5, byrow = TRUE)
+class(myMatrix)
+```
+
+## Incorrectly declared matrices ----
+
+```{r}
+matrix(myValues, 2, 3, byrow = TRUE)
+
+matrix(myValues, nrow = 3, ncol = 4, byrow = TRUE)
+```
+
+# Matrix operations
+
+```{r}
+# scalar multiplication ----
+4 * myMatrix
+
+# Make 2x5 matrix ----
+myValues2 <- seq(from = 21, to = 30)
+myMatrix2 <- matrix(myValues2, nrow = 2, byrow = TRUE)
+
+# add matrices ----
+myMatrix + myMatrix2
+
+# subtract matrices ----
+myMatrix2 - myMatrix
+
+# dot product for matrices ----
+myMatrix * myMatrix2
+```
+
+# Matrix multiplication ----
+
+```{r}
+# Make a couple of 2x2 matrices ----
+cats <- matrix(data = c(0,4,3,1), nrow = 2, byrow = TRUE)
+dogs <- matrix(data = c(6,-3,0,2), nrow = 2, byrow = TRUE)
+
+cats %*% dogs
+```
+
+## Leslie matrix example
+
+```{r}
+# Create your matrix ----
+insectLeslie <- matrix(c(0, 0, 600, 0.2, 0, 0, 0, 0.08, 0),
+                        nrow = 3,
+                        ncol = 3,
+                        byrow = TRUE)
+
+# Insect lifestage populations (year 0) ----
+insectY0 <- c(12000, 700, 500)
+
+# Populations at year 1 ----
+insectY1 <- insectLeslie %*% insectY0
+insectY1
+
+# Population at year 2 ----
+insectY2 <- insectLeslie %*% insectY1
+insectY2
+
+# Population at year 3 ----
+insectY3 <- insectLeslie %*% insectY2
+insectY3
+```
+
+## Tree leslie example
+
+```{r}
+# make matrix ----
+treeLeslie <- matrix(c(0, 0, 5000, 0.1, 0, 0, 0, 0.06, 0.95),
+                      nrow = 3, 
+                      ncol = 3, 
+                      byrow = TRUE)
+treeLeslie
+
+# initial starting conditions ----
+treeY0 <- c(5000, 0, 0)
+
+# pop at year 1 ----
+treeY1 <- treeLeslie %*% treeY0
+treeY1
+
+treeY2 <- treeLeslie %*% treeY1
+treeY2
+```
+
+
+
+
+
+
+
+
+
